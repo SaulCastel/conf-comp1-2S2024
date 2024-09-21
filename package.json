@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "start": "node dist/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "parser": "ts-jison -t typescript -n TsCalc -o src/ts-calculator.ts grammar/ts-calculator.jison",
     "build": "tsc"
   },
   "keywords": [],
