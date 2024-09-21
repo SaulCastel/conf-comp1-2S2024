@@ -1,5 +1,5 @@
 %{
-    import LexicalError from './Exceptions/Lexical.js';
+  import LexicalError from './Exceptions/Lexical.js';
 %}
 
 %lex
@@ -35,6 +35,7 @@
 
 /* operator associations and precedence */
 %{
+  import SyntaxError from './Exceptions/Syntax.js'
   import BinaryExpr from './Expressions/Binary.js'
   import LiteralExpr from './Expressions/Literal.js'
   import UnaryExpr from './Expressions/Unary.js'
@@ -43,6 +44,7 @@
   import VarAssignmentStmt from './Statements/VarAssignment.js'
   import VarLookUpExpr from './Expressions/VarLookUp.js'
   import BlockStmt from './Statements/Block.js'
+  const errors = []
 %}
 
 
@@ -56,7 +58,7 @@
 
 start
   : statements EOF
-  { return $1; }
+  { return {errors: errors, ast: $1} }
 ;
 
 statements
@@ -67,6 +69,11 @@ statements
   }
   | statement ';'
   { $$ = [$1] }
+  | error ';'
+  {
+    errors.push(new SyntaxError($1, @1))
+    $$ = []
+  }
 ;
 
 statement
@@ -108,7 +115,11 @@ expression
   : arithmetic
   | relational
   | '(' expression ')'
-  { $$ = $2}
+  { $$ = $2 }
+  | '(' error ')'
+  {
+    errors.push(new SyntaxError(@2, @2))
+  }
   | '-' expression %prec UMINUS
   { $$ = new UnaryExpr($1, $2, @1) }
   | literal
