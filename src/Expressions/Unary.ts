@@ -1,6 +1,7 @@
 import { TokenLocation } from '@ts-jison/common';
 import Expression from './Expression.js';
 import getNegation from './operations/Negation.js';
+import Context from '../Context/Context.js';
 
 export default class UnaryExpr implements Expression {
     private operator: string;
@@ -13,8 +14,8 @@ export default class UnaryExpr implements Expression {
         this.location = location;
     }
 
-    interpret() {
-        const expr = this.expr.interpret();
+    interpret(ctx: Context) {
+        const expr = this.expr.interpret(ctx);
         switch (this.operator) {
             case '-':
                 return getNegation(expr, this.location);

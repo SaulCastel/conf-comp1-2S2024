@@ -3,6 +3,7 @@ import Expression from './Expression.js';
 import getDifference from './operations/Substraction.js';
 import getSum from './operations/Sum.js';
 import getComparison from './operations/Relational.js';
+import Context from '../Context/Context.js';
 
 export default class BinaryExpr implements Expression {
     private left: Expression;
@@ -22,9 +23,9 @@ export default class BinaryExpr implements Expression {
         this.location = location;
     }
 
-    interpret() {
-        const left = this.left.interpret();
-        const right = this.right.interpret();
+    interpret(ctx: Context) {
+        const left = this.left.interpret(ctx);
+        const right = this.right.interpret(ctx);
 
         switch (this.operator) {
             case '+':
