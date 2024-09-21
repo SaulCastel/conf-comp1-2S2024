@@ -8,18 +8,13 @@ export default function getSum(
 ) {
     const leftType = typeof left;
     const rightType = typeof right;
-    switch (leftType) {
-        case 'number':
-        case 'string':
-            switch (rightType) {
-                case 'number':
-                case 'string':
-                    return left + right;
-            }
-        default:
-            throw new RuntimeError(
-                `Sum is undefined for types ${leftType} and ${rightType}`,
-                location
-            );
+    if (leftType === 'number' || leftType === 'string') {
+        if (rightType === 'number' || rightType === 'string') {
+            return left + right;
+        }
     }
+    throw new RuntimeError(
+        `Sum is undefined for types ${leftType} and ${rightType}`,
+        location
+    );
 }

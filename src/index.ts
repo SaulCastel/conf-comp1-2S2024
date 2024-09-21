@@ -1,9 +1,9 @@
 import Expression from './Expressions/Expression.js';
-import { TsCalcParser } from './ts-calculator.js';
+import { LangParser } from './Parser.js';
 
-const input = '1 + a; 2 - 3 - 1 + 5;';
+const input = '1 + 1 - 2; 3 + 1 == 4; -3 + 2;-(-3 + 2);';
 try {
-    const exprs: Expression[] = new TsCalcParser().parse(input);
+    const exprs: Expression[] = new LangParser().parse(input);
     for (const expr of exprs) {
         console.log(expr.interpret());
     }

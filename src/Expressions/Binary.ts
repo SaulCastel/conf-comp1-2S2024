@@ -2,6 +2,7 @@ import { TokenLocation } from '@ts-jison/common';
 import Expression from './Expression.js';
 import getDifference from './operations/Substraction.js';
 import getSum from './operations/Sum.js';
+import getComparison from './operations/Relational.js';
 
 export default class BinaryExpr implements Expression {
     private left: Expression;
@@ -30,6 +31,8 @@ export default class BinaryExpr implements Expression {
                 return getSum(left, right, this.location);
             case '-':
                 return getDifference(left, right, this.location);
+            case '==':
+                return getComparison(left, this.operator, right, this.location);
         }
     }
 }

@@ -8,16 +8,13 @@ export default function getDifference(
 ) {
     const leftType = typeof left;
     const rightType = typeof right;
-    switch (leftType) {
-        case 'number':
-            switch (rightType) {
-                case 'number':
-                    return left - right;
-            }
-        default:
-            throw new RuntimeError(
-                `Substraction is undefined for types ${leftType} and ${rightType}`,
-                location
-            );
+    if (leftType === 'number') {
+        if (rightType === 'number') {
+            return left - right;
+        }
     }
+    throw new RuntimeError(
+        `Sum is undefined for types ${leftType} and ${rightType}`,
+        location
+    );
 }

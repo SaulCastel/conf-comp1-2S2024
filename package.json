@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "start": "node dist/index.js",
-    "parser": "ts-jison -t typescript -n TsCalc -o src/ts-calculator.ts grammar/ts-calculator.jison",
+    "parser": "ts-jison -t typescript -n Lang -o src/Parser.ts grammar/grammar.jison",
     "build": "tsc"
   },
   "keywords": [],
