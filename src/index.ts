@@ -8,7 +8,6 @@ const input = `
     echo 3 + 1 == 4;
     echo -3 + 2;
     echo -(-3 + 2);
-    echo echo;
     let hello: string = "Hello";
     let world: string = "World";
     echo hello + ", " + world + "!";
@@ -20,7 +19,6 @@ const input = `
         echo bar;
     };
     echo foo;
-    echo: string;
     foo = "Nuevo foo";
     echo foo;
     `;
